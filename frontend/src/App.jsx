@@ -50,6 +50,19 @@ function App() {
     }
   };
 
+  const editTask = async (id, newTitle) => {
+    try {
+      const response = await axios.put(`${API_URL}/${id}`, { title: newTitle });
+      setTasks(
+        tasks.map((task) => (task._id === id ? { ...task, title: response.data.title } : task))
+      );
+      setError(null);
+    } catch (err) {
+      console.error('Error editing task:', err);
+      setError('Failed to edit task.');
+    }
+  };
+
   const toggleComplete = async (id, currentStatus) => {
     try {
       const newStatus = currentStatus === 'pending' ? 'completed' : 'pending';
@@ -90,6 +103,7 @@ function App() {
                   tasks={tasks} 
                   onDelete={deleteTask} 
                   onToggleComplete={toggleComplete} 
+                  onEdit={editTask}
                 />
               )}
             </div>

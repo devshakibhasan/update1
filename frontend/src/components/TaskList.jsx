@@ -1,7 +1,7 @@
 import TaskItem from './TaskItem';
 import { ClipboardList } from 'lucide-react';
 
-function TaskList({ tasks, onDelete, onToggleComplete }) {
+function TaskList({ tasks, onDelete, onToggleComplete, onEdit }) {
   if (tasks.length === 0) {
     return (
       <div className="text-center py-12 flex flex-col items-center justify-center bg-gray-50 rounded-xl border-2 border-dashed border-gray-200">
@@ -20,6 +20,7 @@ function TaskList({ tasks, onDelete, onToggleComplete }) {
           task={task}
           onDelete={onDelete}
           onToggleComplete={onToggleComplete}
+          onEdit={onEdit}
         />
       ))}
     </ul>
